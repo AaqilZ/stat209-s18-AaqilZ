@@ -1,0 +1,76 @@
+name,ticker,industry,price,highest,lowest,pe
+"general mills, inc.",GIS,food,55.91,61.59,49.65,20.47
+jpmorgan chase & co.,JPM,finance,114.37,117.35,81.64,17.94
+microsoft corporation,MSFT,tech,92.39,96.07,63.62,28.3
+parsley energy inc,PE,energy,23.24,33.07,21.12,322.06
+procter & gamble co,PG,consumer,81.42,94.67,78.59,22.02
+sprint corp,S,consumer,5.41,9.44,4.91,3.147
+starbucks corporation,SBUX,consumer,55.97,64.87,52.58,18.8
+at&t inc.,T,consumer,36.79,42.7,32.55,22.75
+visa inc,V,consumer,121.73,126.88,86.98,40.34
+altaba inc,AABA,tech,74.46,80.56,44.79,39.77
+apple inc.,AAPL,tech,171.95,180.1,135.1,16.82
+american express company,AXP,consumer,96.9,102.39,75.51,16.38
+chesapeake energy corporation,CHK,energy,2.76,6.59,2.53,0
+"cisco systems, inc.",CSCO,tech,44.01,45.13,30.36,0
+ford motor company,F,manufacturing,10.6,13.48,10.19,5.57
+general electric company,GE,manufacturing,14.73,30.59,14.23,13.64
+alphabet inc,GOOG,tech,1100.78,1186.89,803.37,34.29
+"advanced micro devices, inc.",AMD,tech,11.99,15.65,9.7,802.54
+raytheon company,RTN,defense,216.78,218.78,148.65,31.25
+lockheed martin corporation,LMT,defense,358.83,363,263.18,27.41
+intel corporation,INTC,tech,46.14,50.85,33.23,14.74
+chevron corporation,CVX,energy,111.02,133.88,102.55,29.35
+adobe systems incorporated,ADBE,tech,202.5,205.12,117.83,59.86
+nvidia corporation,NVDA,tech,248.16,251.87,95.17,51.42
+powershares aerospace & defense (etf),PPA,etf,57.7,58.82,42.71,20.91
+snap inc,SNAP,tech,18.99,29.44,11.28,0
+facebook inc,FB,tech,175.39,195.32,132.9,32.52
+"netflix, inc.",NFLX,tech,278.41,286.81,138.26,195.07
+tesla inc,TSLA,manufacturing,332.86,389.61,242.01,0
+spdr s&p 500 etf trust,SPY,etf,271.41,286.63,231.61,25.502
+etfmg alternative harvest etf,MJ,etf,32.76,39.72,27.08,-244.425
+boeing co,BA,defense,352.71,361.45,170.4,30.08
+bank of america corp,BAC,finance,31.9,32.67,22.07,20.74
+walt disney co,DIS,consumer,105.86,116.1,96.2,18.27
+the coca-cola co,KO,food,44.12,48.62,41.05,40.03
+walmart inc,WMT,consumer,94.91,109.98,68.69,25.24
+exxon mobil corporation,XOM,energy,75.69,89.3,73.9,23.4
+hudson's bay co,HBC,consumer,9.89,13.43,8.08,0
+johnson & johnson,JNJ,consumer,131.15,148.32,118.05,339.67
+novartis ag (adr),NVS,pharma,85.45,94.19,72.67,26.07
+altria group inc,MO,manufacturing,64.44,77.79,60.01,12.09
+international business machines corp.,IBM,tech,154.89,182.55,139.13,12.84
+"pepsico, inc.",PEP,food,109.62,122.51,106.19,21.52
+"amgen, inc.",AMGN,pharma,183.25,201.23,152.16,16.66
+hp inc,HPQ,tech,21.41,24.1,15.72,14.44
+unitedhealth group inc,UNH,pharma,227.06,250.79,156.49,23.91
+time warner inc,TWX,consumer,95.14,103.9,85.88,17.52
+dell technologies inc,DVMT,tech,69.64,92.4,59.92,0
+goldman sachs group inc,GS,finance,264.5,273.79,209.62,13.25
+honda motor co ltd (adr),HMC,manufacturing,35.55,37.29,27.05,6.5
+sony corp (adr),SNE,consumer,49.49,53.91,30.7,12.73
+target corporation,TGT,consumer,73.06,78.7,48.56,15.34
+texas instruments incorporated,TXN,manufacturing,105.1,120.75,75.66,29.18
+aetna inc,AET,finance,177.73,194.4,124.83,29.36
+anheuser busch inbev nv (adr),BUD,consumer,105.23,126.5,101.21,39.98
+fedex corporation,FDX,consumer,240.94,274.66,182.89,22.15
+berkshire hath,BRK/B,finance,190,210,156.8,26.873
+cvs health corp,CVS,pharma,70.66,84,66.45,10.91
+accenture plc,ACN,consumer,161.58,163.6,114.82,28.63
+moody's corporation,MCO,finance,168.31,169.51,109.55,43.34
+sandisk corporation,SNDK,tech,76.18,78.83,44.28,37.18
+morgan stanley,MS,finance,55.05,58.05,40.06,17.79
+vanguard 500 index fund,VOO,etf,249.44,263.37,212.62,25.481
+ishares us real estate etf,IYR,etf,74.38,83.27,71.26,8.22
+wisdomtree emerging markets eqty incm fd,DEM,etf,47.75,50.31,38.98,10.868
+ishares trust,IXUS,etf,63.79,67.93,53,19.543
+general dynamics corporation,GD,defense,222.33,229.54,183.72,22.25
+realty income corp,O,finance,49.61,63.6,47.25,40.74
+kinder morgan inc,KMI,manufacturing,16.97,22.1,16.56,1409.47
+"qualcomm, inc.",QCOM,tech,63.42,69.28,48.92,0
+oracle corporation,ORCL,tech,49.85,53.14,41.5,21.39
+nestle sa,NESN,food,75.2,86.4,72,32.55
+pinnacle foods inc,PF,food,56.48,66.67,52.81,38.19
+bank of new york mellon corp,BK,finance,56.43,58.99,45.12,18.59
+davita inc,DVA,pharma,72.71,80.71,52.51,15
