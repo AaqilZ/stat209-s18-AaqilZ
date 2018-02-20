@@ -1,0 +1,81 @@
+---
+title: 'Reliability of PE ratio in stock valuation: an analysis'
+author: "Aaqil Zakarya"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(ggplot2)
+library(dplyr)
+```
+
+# Reliability of PE ratio in stock valuation: an analysis
+
+## Overview
+
+I have gathered the basic data about 75 stocks which ranges from their current prices, 52 week highs and lows, and the price to earnings ratios. I comipled a list of 75 companies I was most familiar with and then searched for their details. I then categorized them into industries such as finance, tech, etc.
+
+I am interested in this data because I have recently gotten interested in finance, especially the stock market and many forums I have been reading have utilized the price to earnings ratio (P/E) in technical analysis of stocks, so it is important to measure the reliability of this ratio in evaluating the stock value. 
+
+## Data dictionary
+
+Here is a data dictionary for the market dataset:
+
+- **name**: This is the name of the company registered on the New York Stock Exchange(NYSE)
+- **ticker**: This is the abbriviated representation of the name of the company (called ticker) as is seen on the NYSE
+- **industry**: This is a categorization of the company into: finance, tech, manufacturing, pharma, defense, food, consumer, energy and etf depending on what the major area of operation the company has
+- **price**: This was the price of the stock as seen on 20th February 2018
+- **highest**: This is the highest price the stock had in the last 52 weeks of measuring the stock
+- **lowest**: This is the lowest price the stock had in the last 52 weeks of measuring the stock
+- **pe**: This is the price to earnings ratio, which is the price of the stock divided by the earnings of the company, if the p/e ratio s 
+
+Which can be read in as follows:
+
+```{r}
+market <- read_csv("https://raw.githubusercontent.com/urstats/stat209-s18-AaqilZ/master/stocks.csv")
+
+market_adjusted <- filter(market, (price < 450) & (pe < 150) & (pe > 0))
+market
+```
+
+## Exploratory Analysis
+
+To orient ourselves with the analysis, we will look at the stock prices per industry. This gives us a general sense of the distribution of the prices of industries, and we can understand which industries are generally highly priced, indicating higher demand. For instance, the consumer industry has a higher concentration of low priced stocks than does the tech industry.
+
+```{r, echo=FALSE}
+ggplot(market_adjusted, aes(industry, price))+
+  geom_point()
+```
+
+Now, the P/E ratio is often used to analyze whether a stock is overvalued or undervalued. If a stock is overvalued then it means that the stock price is higher than it should be, and it is more than likely to correct itself over time and reduce in price, hence it is a bad investment. As a rule of thumb, a high P/E ratio suggests an overvalued stock(Investopedia, 2017). Now we will see the relation between the price of a stock and its pe ratio and see how each industry affects that trend.  
+```{r, echo=FALSE}
+ggplot(market_adjusted, aes(price, pe))+
+  geom_point(aes(color = industry))
+```
+This becomes an important observation when comparing companies within the same industry. When comparing two companies in the tech industry, it would be worth comparing companies which are lower priced but have a higher P/E ratio to companies which are higher priced but have a lower P/E ratio. All things being equal, the company with the higher P/E ratio would be more likely to correct itself over time and would be a bad investment. However, there are numerous other factors to be looked into when comparing companies in this manner, such as looking into the management techniques etc.
+
+Now we will look at how this trend(in the graph above) can be better interpreted with a log scale graph and taking into account the earnings of the companies. 
+
+```{r, echo=FALSE}
+ggplot(market_adjusted, aes(price, pe))+
+  geom_point(aes(color = industry, size = price/pe))+
+  scale_x_log10()+
+  scale_y_log10()+
+  xlab("price(log scale)")+
+  ylab("pe(log scale)")
+```
+Here, we can see that generally, higher priced companies have higher earnings, which we first intuitively saw in the first graph(higher prices = higher demand). A P/E ratio make more sense when comparing companies within the same industry because it takes into account a lot of factors that the companies have in common such as regulations etc. For instance, the defense industry shows a trend of very close P/E ratios and makes for a good comparision within the defense industry. At this point we can then start looking into other factors such as the earnings of the company and future projects. However, when comparing companies across industries, the P/E ratio can often be misleading. For instance, the energy and tech companies are similarly priced and have similar P/E ratios yet the energy industry is subject to the fluctuating oil prices and is not reflected in this comparision. 
+
+## Conclusion
+
+I have learned that the P/E ratio in isolation does not tell us much. It can come in handy to use as a reference tool when comapring companies in the same industry. I would like to look into the P/E ratio of a particular industry, and then isolate other factors that affect that industry, such as oil price fluctuations and see how that affects how we place a value on these stocks. 
+
+## References
+
+Investopedia:
+https://www.investopedia.com/university/peratio/
+
