@@ -1,0 +1,96 @@
+---
+title: "Richmond - A modern day analysis of a history of racial segregation"
+author: "Aaqil Zakarya"
+output:
+  html_document:
+    df_print: paged
+---
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(fig.height = 5)
+knitr::opts_chunk$set(fig.width = 8.5)
+knitr::opts_chunk$set(out.width = "100%")
+knitr::opts_chunk$set(dpi = 300)
+
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(ggmap)
+library(viridis)
+library(forcats)
+```
+
+
+```{r}
+tracts <- read_csv("https://raw.githubusercontent.com/statsmaths/stat_data/gh-pages/acs_tract_data_2016.csv.gz")
+```
+
+
+## Richmond - A brief history of the capital of the confederacy
+
+Richmond was made the capital of the confederacy in 1861, when Virginia decided to secede from the Union to fight in the civil war. Given the entrenched racism against and systematic abuse of the African American people since the Civil War, Richmond grew as a severely racially segregated city.
+
+After the end of the reconstruction era in 1877, Jim Crow laws were enforced in the southern states, leading to an almost an entire century of targetted discrimination against the African American people until the 1950s. During this era, black people were devoided of economic opportunities which lead to a negative cycle of poverty and inability to rise up the social ladder. Moreover, the segregation of schools resulted in black schools not receiving funding compared to their white peer schools. Naturally after years of supressing opportunities to live, work or study to the black people a situation had been artificially created where black people were susceptible to poverty and crime. 
+
+A more specific policy of discrimination was segregation according to living areas. FDR came up with a loan policy to help Americans make their homes and to determine which areas of the cities would get these loans, they came up with color coded maps. The areas on the maps in green would have easier access to loans and the areas in red would have lower chances if getting these loans. This process was called 'Redlining' (Madrigal, 2014). The decision to color code certain areas was sometimes based on the fact that these areas were inhabited by black people and other minorities (Bouie, 2014). This process systematically prohibited black people from getting homes. To top off discrimination by the government, even the constructors of these neighbourhoods had racist policies denying houses to black people even if they could afford them (Loewen, 2005).
+
+
+The implications of years of racial segregation are pervasive throughout most modern day socioeconomic systems. It is but obvious that areas where people have homes and areas that are doing well will see faster economic growth than other areas. So areas that had been artificially created by helping white people saw faster economic growth than their black counterparts, as more comapanies opened in white neighbourhoods simply because only those neighbourhoods had enough cash in hand to buy products. This lead to a cycle of positive growth and opportunities in white neighbourhoods and a negative cycle of economic stagnation in black neighbourhoods. 
+
+These deeply entrenched policies have done decades of damage as we will now see. According to the census data of 2010(?), nearly 60 years after the end of the Jim Crow era, we can see the state of the African American people in the city of Richmond itself. We use "median rent" as a proxy to measure how affluent or well the area is. Median rent is generally a good indicator of the development of the area as the property prices rise along with the development of the surrounding area. Below is a graph that shows the distibution of peoples median rent vs the income bracket they fall in.  
+
+```{r}
+acs_rva <- filter(tracts, cbsa == "Richmond, VA")
+
+acs_rva_median_rent_0_2000 <- filter(acs_rva, acs_rva$median_rent<2000)
+
+temp <- select(acs_rva, starts_with("race_"))
+acs_rva$max_race_category <- names(temp)[apply(temp, 1, which.max)]
+
+temp <- select(acs_rva_median_rent_0_2000, starts_with("race_"))
+acs_rva_median_rent_0_2000$max_race_category <- names(temp)[apply(temp, 1, which.max)]
+
+
+ggplot(acs_rva_median_rent_0_2000, aes(median_rent, income_075_100+income_100_125+income_125_150+income_150_200+income_200_999))+
+  geom_point(aes(color = max_race_category), alpha = 0.5)+
+  labs(title = "Income - Rent graph", x = "Median Rent", y = "Income (in thousands)", color = "Majority Race in Area")+
+  scale_color_manual(labels = c("Majority Black", "Majority White"), values = c("red", "blue"))
+```
+
+As is evident, it can be seen that majority black neighbourhoods have lower household incomes and have lower median rents.Lower median rents show that majority black neighbourhoods are not developed and don't have the same amenities as the white neighbourhoods. Clearly a relic of the years of instituitional discriminaation against the black folk of the country.
+
+The above graph is a metaphor for White America quite literally oppressing Black America. 
+
+In order to fully grasp the reality of the situation, we will examine a graph of the city of Richmond itself. This will show us what the distribution of the racial groups around Richmond is.
+
+```{r}
+qmplot(lon, lat, data = acs_rva, geom = "blank")+
+  geom_point(aes(color = max_race_category), alpha = 0.3)+
+  labs(title = "Segregation according to race", x = "Map of Richmond", color = "Majority Race in Area")+
+  scale_color_manual(labels = c("Majority Black", "Majority White"), values = c("red", "blue"))
+```
+
+According to the first graph, we knew that black people are predominantly in poor and underdeveloped neighbouhoods but now it is visually apparent that they are also almost entirely segregated. The forced clusturing of the black people is also another way in which the policies of the by-gone era created the so called ghettos of today's age (Bouie, 2014).
+
+
+
+```{r}
+ggplot(acs_rva_median_rent_0_2000, aes((income_075_100+income_100_125+income_125_150+income_150_200+income_200_999), rent_by_income_30_35+rent_by_income_35_40+rent_by_income_40_50+rent_by_income_50_99))+
+  geom_point(aes(color = max_race_category), alpha = 0.4)+
+  scale_x_log10()+
+  scale_y_log10()+
+  labs(title = "Cost of Segregation", x = "Income levels (log scale)", y = "% of Income on Rent (log scale)", color = "Majority Race in Area")+
+  scale_color_manual(labels = c("Majority Black", "Majority White"), values = c("red", "blue"))
+```
+
+
+
+## References
+
+Alexis C. Madrigal, Atlantic, 22 May 2014
+
+Jamelle Bouie, Daily Beast, 13 march 2014
+
+James W. Loewen, Sundown Towns, 2005
