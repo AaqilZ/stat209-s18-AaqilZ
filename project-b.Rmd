@@ -74,6 +74,10 @@ qmplot(lon, lat, data = acs_rva, geom = "blank")+
 
 According to the first graph, we knew that black people are predominantly in poor and underdeveloped neighbouhoods but now it is visually apparent that they are also almost entirely segregated. The forced clusturing of the black people is also another way in which the policies of the by-gone era created the so called ghettos of today's age (Bouie, 2014).
 
+Moreover, we must pay attention to the way people's income is spent. Even though the median rents in predominantly black neighbouhoods are lower than white neighbourhoods, it is worth paying attention to the percentage of the household income that is spent on rent, indicating what is left for other expenditures.
+
+Below is a graph that shows the percentage of income spent on the rent and the racial distribution of that expenditure.
+
 
 
 ```{r}
