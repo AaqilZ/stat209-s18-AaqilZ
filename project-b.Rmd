@@ -1,5 +1,5 @@
 ---
-title: "Richmond - A modern day analysis of a history of racial segregation"
+title: "Richmond - A modern day analysis of a city with a history of racial segregation"
 author: "Aaqil Zakarya"
 output:
   html_document:
@@ -34,12 +34,7 @@ Richmond was made the capital of the confederacy in 1861, when Virginia decided 
 
 After the end of the reconstruction era in 1877, Jim Crow laws were enforced in the southern states, leading to an almost an entire century of targetted discrimination against the African American people until the 1950s. During this era, black people were devoided of economic opportunities which lead to a negative cycle of poverty and inability to rise up the social ladder. Moreover, the segregation of schools resulted in black schools not receiving funding compared to their white peer schools. Naturally after years of supressing opportunities to live, work or study to the black people a situation had been artificially created where black people were susceptible to poverty and crime. 
 
-A more specific policy of discrimination was segregation according to living areas. FDR came up with a loan policy to help Americans make their homes and to determine which areas of the cities would get these loans, they came up with color coded maps. The areas on the maps in green would have easier access to loans and the areas in red would have lower chances if getting these loans. This process was called 'Redlining' (Madrigal, 2014). The decision to color code certain areas was sometimes based on the fact that these areas were inhabited by black people and other minorities (Bouie, 2014). This process systematically prohibited black people from getting homes. To top off discrimination by the government, even the constructors of these neighbourhoods had racist policies denying houses to black people even if they could afford them (Loewen, 2005).
-
-
-The implications of years of racial segregation are pervasive throughout most modern day socioeconomic systems. It is but obvious that areas where people have homes and areas that are doing well will see faster economic growth than other areas. So areas that had been artificially created by helping white people saw faster economic growth than their black counterparts, as more comapanies opened in white neighbourhoods simply because only those neighbourhoods had enough cash in hand to buy products. This lead to a cycle of positive growth and opportunities in white neighbourhoods and a negative cycle of economic stagnation in black neighbourhoods. 
-
-These deeply entrenched policies have done decades of damage as we will now see. According to the census data of 2010(?), nearly 60 years after the end of the Jim Crow era, we can see the state of the African American people in the city of Richmond itself. We use "median rent" as a proxy to measure how affluent or well the area is. Median rent is generally a good indicator of the development of the area as the property prices rise along with the development of the surrounding area. Below is a graph that shows the distibution of peoples median rent vs the income bracket they fall in.  
+These deeply entrenched policies have done decades of damage as we will now see. According to the census data of 2010, nearly 60 years after the end of the Jim Crow era, we can see the state of the African American people in the city of Richmond itself. We use "median rent" as a proxy to measure how affluent or well the area is. Median rent is generally a good indicator of the development of the area as the property prices rise along with the development of the surrounding area. Below is a graph that shows the distibution of peoples median rent vs the income bracket they fall in.  
 
 ```{r}
 acs_rva <- filter(tracts, cbsa == "Richmond, VA")
@@ -63,6 +58,10 @@ As is evident, it can be seen that majority black neighbourhoods have lower hous
 
 The above graph is a metaphor for White America quite literally oppressing Black America. 
 
+A more specific policy of discrimination was segregation according to living areas. FDR came up with a loan policy to help Americans make their homes and to determine which areas of the cities would get these loans, they came up with color coded maps. The areas on the maps in green would have easier access to loans and the areas in red would have lower chances if getting these loans. This process was called 'Redlining' (Madrigal, 2014). The decision to color code certain areas was sometimes based on the fact that these areas were inhabited by black people and other minorities (Bouie, 2014). This process systematically prohibited black people from getting homes. To top off discrimination by the government, even the constructors of these neighbourhoods had racist policies denying houses to black people even if they could afford them (Loewen, 2005).
+
+The implications of years of racial segregation are pervasive throughout most modern day socioeconomic systems. It is but obvious that areas where people have homes and areas that are doing well will see faster economic growth than other areas. So areas that had been artificially created by helping white people saw faster economic growth than their black counterparts, as more comapanies opened in white neighbourhoods simply because only those neighbourhoods had enough cash in hand to buy products. This lead to a cycle of positive growth and opportunities in white neighbourhoods and a negative cycle of economic stagnation in black neighbourhoods. 
+
 In order to fully grasp the reality of the situation, we will examine a graph of the city of Richmond itself. This will show us what the distribution of the racial groups around Richmond is.
 
 ```{r}
@@ -76,20 +75,32 @@ According to the first graph, we knew that black people are predominantly in poo
 
 Moreover, we must pay attention to the way people's income is spent. Even though the median rents in predominantly black neighbouhoods are lower than white neighbourhoods, it is worth paying attention to the percentage of the household income that is spent on rent, indicating what is left for other expenditures.
 
-Below is a graph that shows the percentage of income spent on the rent and the racial distribution of that expenditure.
+If a household spends more than 30% of its income on housing, then that household is defined to be "cost-burdened". Households which end up dedicating more than 50% of their income towards paying for housing are classified as "serverly burdened households". 
 
+Below is a graph that shows the percentage of income spent on the rent and the racial distribution of that expenditure.
 
 
 ```{r}
 ggplot(acs_rva_median_rent_0_2000, aes((income_075_100+income_100_125+income_125_150+income_150_200+income_200_999), rent_by_income_30_35+rent_by_income_35_40+rent_by_income_40_50+rent_by_income_50_99))+
   geom_point(aes(color = max_race_category), alpha = 0.4)+
+    annotate("rect", xmin = 0, xmax = 100,
+                   ymin = 50, ymax = 100,
+                   fill = "red", alpha = 0.1)+
+  annotate("text", x = 5, y = 80,
+           label = "Severely Burdened Households")+
   scale_x_log10()+
   scale_y_log10()+
   labs(title = "Cost of Segregation", x = "Income levels (log scale)", y = "% of Income on Rent (log scale)", color = "Majority Race in Area")+
   scale_color_manual(labels = c("Majority Black", "Majority White"), values = c("red", "blue"))
 ```
 
+It is evident that the majority black households almost entirely fall in the category of "serverly burdened", a consequence of years of segragation and depriving people of economic opportunites. 
 
+## Summary
+
+With the city of Richmond as a model, it becomes apparent that centuries of systematically discrimintating against an entire race of people has created a cycle of negative consequences. Politicians are often found blaming African Americans for their culture and blaming the black youth for falling prey to crime and drugs. These politicians convinienty glaze over, or worse, refuse to acknowledge, the conditions African Americans were forced into by devoiding them of housing, academic, and economic opportunities. 
+
+This study shows why taking action to reverse years of discrimination is necessary to help uplift fellow Americans so we can undo the damage that has been done to them throughout our history. 
 
 ## References
 
