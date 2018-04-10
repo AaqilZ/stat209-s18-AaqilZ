@@ -1,4 +1,4 @@
-Name,Type,Total,HP,Attack,Defense
+name,type,total,hp,attack,defense
 Bulbasaur,Grass,318,45,49,49
 Ivysaur,Grass,405,60,62,63
 Venusaur,Grass,525,80,82,83
