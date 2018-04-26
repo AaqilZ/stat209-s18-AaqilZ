@@ -1,5 +1,5 @@
 ---
-title: "Cancer occurrence in poverty ridden areas"
+title: "Lung cancer occurrence in poverty ridden areas"
 author: "Aaqil Zakarya"
 output: html_document
 ---
@@ -20,7 +20,6 @@ library(forcats)
 library(smodels)
 ```
 
-AVAILABLE DATASETS (choose one and delete the others)
 
 ```{r}
 cancer <- read_csv("https://statsmaths.github.io/stat_data/cancer_inc_data.csv")
@@ -31,7 +30,7 @@ cancer <- read_csv("https://statsmaths.github.io/stat_data/cancer_inc_data.csv")
 cancer_income <- group_summarize(cancer, poverty)
 ```
 
-It is a well known fact that poor people are more susceptible to become addicted to smoking. In fact, the Centers for Disease Control and Prevention states that 1.75 times more people below the poverty line smoke than people above the poverty line. And it also states that blue collar workers are more likely to start smoking at a young age and smoke higher volumes of cigarettes. 
+It is a well known fact that poor people are more susceptible to become addicted to smoking. In fact, the Centers for Disease Control and Prevention states that 1.75 times more people below the poverty line smoke than people above the poverty line(CDC). And it also states that blue collar workers are more likely to start smoking at a young age and smoke higher volumes of cigarettes. 
 
 Thesis: People below the poverty line are more likely to have lung cancer.
 
@@ -39,26 +38,48 @@ The graphic below shows the relation between the percentage of people below the 
 
 ```{r}
 ggplot(cancer_income, aes(poverty, lung_mean))+
-  geom_point()+geom_smooth(method="lm")
+  geom_point()+geom_smooth(method="lm")+
+  ylab("Lung cancer incidents per 100,000")+
+  xlab("Poverty(in %)")
 ```
-Clearly we can see that there is a positive co-relation between poverty levels and lung cancer rates. 
-
-However we must check to see if this is just the case with lung cancer, or all different types of cancers. If all cancers have a positive co-relation with poverty levels then it could be the case that maybe poor people are just generally more susceptible to terminal disease for some unkwon reason. 
+Clearly we can see that there is a positive co-relation between poverty levels and lung cancer rates. However we must check to see if this is just the case with lung cancer, or all different types of cancers. If all cancers have a positive co-relation with poverty levels then it could be the case that maybe poor people are just generally more susceptible to terminal disease for some unknown reason. 
 
 The graph below shows the co-relation between other cancers and poverty
 
 ```{r}
 ggplot(cancer_income, aes(poverty, breast_mean+melanoma_mean+colorectal_mean))+
   geom_point()+
-  geom_smooth(method="lm")
+  geom_smooth(method="lm")+
+  xlab("Poverty(in %)")+
+  ylab("Incidents of breast/colorectal/melanoma cancer per 100,000")
 ```
-As we can see, there is a very weak negative co-relation between the two. Which rules out the idea that maybe poor people are more susceptible to all kinds of cancers. 
+As we can see, there is a very weak negative co-relation between the two, which rules out the idea that maybe poor people are more susceptible to all kinds of cancers.
 
-Intuitively it makes sense given CDCs data about more poor people smoking cigarettes that they have higher incidents of lung related cancers. 
-
-Below is a graph which further supports the argument by showing how lung cancer rates drop as income increases. 
+The table below also shows that breast cancer and melanoma have a negative co-relation with poverty areas but colorectal cancer has a positive co-relation with poverty. All three of these co-relations are statistically significant because of the confidence intervals also shown in the table. Perhaps the combined effects of two negative co-relations and a positive co-relation levels off the co-relation of other cancers with poverty to be a weak negative co-relation. 
 
 ```{r}
-ggplot(cancer_income, aes(income_mean, lung_mean))+
-  geom_point()+geom_smooth(method="lm")
+model <- lm_basic(poverty ~ breast_mean+melanoma_mean+colorectal_mean, cancer_income)
+
+reg_table(model, level = 0.95)
 ```
+
+Intuitively it makes sense, given CDCs data, that poor people have higher incidents of lung related cancers. 
+
+
+To further support the argument that an increase in poverty leads to an increase in lung cancer, we can use the logical concept of a contrapositive. A contrapositive is the reverse-negation of an implication statement. For instance, if I were to say A implies B, then the contrapositive of that would be: Not B implies Not A. Hence, logically, another way of saying that as poverty increases, lung cancer increases is to say that as lung cancer decreases, income increases.  
+
+Below is a graph which further supports the argument by showing how income increases as rates of lung cancer decrease(as you travel towards the negative x-axis).
+
+```{r}
+ggplot(cancer_income, aes(lung_mean, income_mean))+
+  geom_point()+geom_smooth(method="lm")+
+  xlab("Lung cancer incidents per 100,000")+
+  ylab("Median Income")
+```
+A word of warning: A contrapositive must not be taken to be causation. I am not trying to say that having lesser lung cancer causes income to rise, all I am saying is that there is a co-relation with no commentary on its causation.
+
+
+
+#References
+
+CDC: https://www.cdc.gov/tobacco/disparities/low-ses/index.htm
